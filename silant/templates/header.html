@@ -8,9 +8,9 @@
             <h1 class="header-title-min">“Мой Силант”</h1>
             <li>
                 {% if request.user.is_authenticated %}
-                <button class="logout logout-js" data-url="{% url 'account_logout' %}">Выйти</button>
+                <a class="logout logout-js" data-url="{% url 'account_logout' %}">Выйти</a>
                 {% else %}
-                <button href="{% url 'account_login' %}">Авторизация</button>
+                <a href="{% url 'account_login' %}">Авторизация</a>
                 {% endif %}
             </li>
         </ul>

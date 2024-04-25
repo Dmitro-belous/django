@@ -23,26 +23,26 @@ from .serializer import *
 
 
 def create_groups(sender, **kwargs):
-    if not Group.objects.create(name='Клиент'):
-        Group.objects.create(name='Клиент')
+    if not Group.objects.create(name='Clients'):
+        Group.objects.create(name='Clients')
 
-    if not Group.objects.create(name='Сервисная организация'):
-        Group.objects.create(name='Сервисная организация')
+    if not Group.objects.create(name='Service companies'):
+        Group.objects.create(name='Service companies')
 
-    if not Group.objects.create(name='Менеджер'):
-        Group.objects.create(name='Менеджер')
+    if not Group.objects.create(name='Managers'):
+        Group.objects.create(name='Managers')
 
 
 def is_client(user):
-    return user.groups.filter(name='Клиент').exists()
+    return user.groups.filter(name='Clients').exists()
 
 
 def is_service_organization(user):
-    return user.groups.filter(name='Сервисная организация').exists()
+    return user.groups.filter(name='Service companies').exists()
 
 
 def is_manager(user):
-    return user.groups.filter(name='Менеджер').exists()
+    return user.groups.filter(name='Managers').exists()
 
 
 @api_view(['GET'])
@@ -135,7 +135,7 @@ class MachineListView(LoginRequiredMixin, ListView):
 
 
 class MachineDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
-    permission_required = 'silant_app.view_car'
+    permission_required = 'silant_app.view_machine'
     model = Machine
     template_name = 'machine_view.html'
     context_object_name = 'obj'
@@ -146,7 +146,7 @@ class MachineDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView)
 
 
 class MachineCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
-    permission_required = 'silant_app.add_car'
+    permission_required = 'silant_app.add_machine'
     model = Machine
     form_class = MachineForm
     template_name = 'machine_create.html'
@@ -154,7 +154,7 @@ class MachineCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView)
 
 
 class MachineUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
-    permission_required = 'silant_app.change_car'
+    permission_required = 'silant_app.change_machine'
     model = Machine
     form_class = MachineForm
     template_name = 'machine_update.html'
@@ -311,7 +311,7 @@ class CarMaintenanceListView(LoginRequiredMixin, PermissionRequiredMixin, ListVi
 
 
 class CarClaimsListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
-    permission_required = 'silant_app.view_reclamation'
+    permission_required = 'silant_app.view_maintenance'
     model = Claims
     template_name = 'car_claims.html'
 
