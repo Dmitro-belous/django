@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<a class="back-page" href="{% url 'machine_list' %}"><i class="fas fa-long-arrow-alt-left"></i>Назад</a>
+<h3>Создание машины</h3>
+<form class="form" name="machineForm" method="post" action="{{request.path}}">
+    {% csrf_token %}
+    <div class="united">
+        <label for="id_machine_number">{{form.machine_number.label}}</label> {{form.machine_number}}
+        <label for="id_machine_model">{{form.machine_model.label}}</label> {{form.machine_model}}
+    </div>
+    <div class="united">
+        <label for="id_engine_model">{{form.engine_model.label}}</label> {{form.engine_model}}
+        <label for="id_engine_number">{{form.engine_id.label}}</label> {{form.engine_id}}
+    </div>
+    <div class="united">
+        <label for="id_transmission_model">{{form.transmission_model.label}}</label> {{form.transmission_model}}
+        <label for="id_transmission_number">{{form.transmission_id.label}}</label> {{form.transmission_id}}
+    </div>
+    <div class="united">
+        <label for="id_driving_axle_model">{{form.driving_axle_model.label}}</label> {{form.driving_axle_model}}
+        <label for="id_driving_axle_number">{{form.driving_axle_id.label}}</label> {{form.driving_axle_id}}
+    </div>
+    <div class="united">
+        <label for="id_controlled_axle_model">{{form.controlled_axle_model.label}}</label> {{form.controlled_axle_model}}
+        <label for="id_controlled_axle_number">{{form.controlled_axle_id.label}}</label> {{form.controlled_axle_id}}
+    </div>
+    <div class="united">
+        <label for="id_delivery_contract">{{form.delivery_contract.label}}</label> {{form.delivery_contract}}
+        <label for="id_factory_shipment_date">{{form.factory_shipment_date.label}}</label> {{form.factory_shipment_date}}
+    </div>
+    <div><label for="id_end_consumer">{{form.end_consumer.label}}</label> {{form.end_consumer}}</div>
+    <div><label for="id_delivery_address">{{form.delivery_address.label}}</label> {{form.delivery_address}}</div>
+    <div><label for="id_specification">{{form.specification.label}}</label> {{form.specification}}</div>
+    <div class="united">
+        <label for="id_client">{{form.client.label}}</label> {{form.client}}
+        <label for="id_service_company">{{form.service_company.label}}</label> {{form.service_company}}
+    </div>
+    <button type="submit">Сохранить</button>
+</form>
+{% endblock %}

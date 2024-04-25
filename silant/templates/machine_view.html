@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<a class="back-page" href="{% url 'machine_list' %}"><i class="fas fa-long-arrow-alt-left"></i>Назад</a>
+<div class="client">
+    <i class="silant silant-vehicle"></i>
+    <h2>Машина {{obj.machine_number}}</h2>
+</div>
+<nav class="nav-panel">
+    <ul>
+        <li class="active"><a href="{% url 'machine_detail' obj.pk %}"><i class="silant silant-service"></i> Сведения</a></li>
+        <li><a href="{% url 'car_maintenance' obj.pk %}"><i class="silant silant-maintenance"></i> ТО</a></li>
+        <li><a href="{% url 'car_claims' obj.pk %}"><i class="silant silant-complaint"></i> Рекламации</a></li>
+    </ul>
+</nav>
+<h3>Информация о комплектации и технических характеристиках Вашей техники</h3>
+<section class="area-table">
+<table id="tableCars" class="datatable" data-order='[[11, "desc"],[0, "desc"]]'>
+    <thead class="datatable-thead">
+        <tr>
+            <th>Модель техники</th>
+            <th>Модель двигателя</th>
+            <th>Зав. № двигателя</th>
+            <th>Модель трансмиссии</th>
+            <th>Зав. № трансмиссии</th>
+            <th>Модель ведущего моста</th>
+            <th>Зав. № ведущего моста</th>
+            <th>Модель управляемого моста</th>
+            <th>Зав. № управляемого моста</th>
+            <th>Договор поставки №, дата</th>
+            <th>Дата отгрузки с завода</th>
+            <th>Грузополучатель (конечный потребитель)</th>
+            <th>Адрес поставки (эксплуатации)</th>
+            <th>Комплектация (доп. опции)</th>
+            <th>Клиент</th>
+            <th>Сервисная компания</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><span class="description-js" data-url="{% url 'machine_description' obj.pk 'machine_model' %}">{{obj.machine_model.name}}</span></td>
+            <td><span class="description-js" data-url="{% url 'machine_description' obj.pk 'engine_model' %}">{{obj.engine_model.name}}</span></td>
+            <td>{{obj.engine_id}}</td>
+            <td><span class="description-js" data-url="{% url 'machine_description' obj.pk 'transmission_model' %}">{{obj.transmission_model.name}}</span></td>
+            <td>{{obj.transmission_id}}</td>
+            <td><span class="description-js" data-url="{% url 'machine_description' obj.pk 'driving_axle' %}">{{obj.driving_axle_model.name}}</span></td>
+            <td>{{obj.driving_axle_id}}</td>
+            <td><span class="description-js" data-url="{% url 'machine_description' obj.pk 'controlled_axle' %}">{{obj.controlled_axle_model.name}}</span></td>
+            <td>{{obj.controlled_axle_id}}</td>
+            <td>{{obj.delivery_contract}}</td>
+            <td>{{obj.factory_shipment_date|date:"d.m.Y"}}</td>
+            <td>{{obj.end_consumer}}</td>
+            <td>{{obj.delivery_address}}</td>
+            {% if obj.specification == 'Стандарт'%}
+                <td>{{obj.specification}}</td>
+            {% else %}
+                <td><span class="description-js" data-url="{% url 'machine_description' obj.pk 'specification' %}">Посмотреть</span></td>
+            {% endif %}
+            <td>{{obj.client}}</td>
+            {% if obj.service_company %}
+                <td><span class="description-js" data-url="{% url 'machine_description' obj.pk 'service_company' %}">{{obj.service_company.name}}</span></td>
+            {% else %}
+                <td>Нет компании</td>
+            {% endif %}
+        </tr>
+    </tbody>
+</table>
+</section>
+
+{% endblock %}
